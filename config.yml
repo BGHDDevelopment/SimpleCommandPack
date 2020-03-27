@@ -1,0 +1,70 @@
+#Made by BGHDNetwork(Noodles)
+#=======================================================
+#Plugin Page: https://www.spigotmc.org/resources/45204/
+#=======================================================
+#/scphelp (scp.help) - shows commands,perms,info (Can not be disabled!)
+#=======================================================
+Update:
+  Enabled: true
+#scp.update
+#Enables if there is a message on-join when the plugin is outdated. 
+#=======================================================
+Messages:
+  WebsiteMessage: '&ewww.example.com - &cchange in the config.yml'
+  DiscordMessage: '&ediscord.example.com &cChange discord link in the config.yml'
+  TeamspeakMessage: '&eteamspeak.example.com &cChange ts link in the config.yml'
+  StoreMessage: '&store.example.com &cChange store link in the config.yml'
+  ApplyMessage: '&eapply.example.com &cChange apply link in the config.yml'
+  TwitterMessage: '&etwitter.example.com &cChange apply link in the config.yml'
+  RulesMessage: '&eRules! &cChange apply link in the config.yml'
+#=======================================================  
+#Enabled Commands:
+
+Website:
+  Enabled: true
+#scp.website
+  
+Discord:
+  Enabled: true
+#scp.discord
+
+Teamspeak:
+  Enabled: true
+#scp.teamspeak
+ 
+Store:
+  Enabled: true
+#scp.store
+
+Apply:
+  Enabled: true
+#scp.apply 
+
+Rules:
+  Enabled: true
+#scp.rules 
+
+Twitter:
+  Enabled: true
+#scp.twitter 
+
+YouTubers:
+  Enabled: true
+#scp.youtubers (use /youtubers)
+#list.youtube (List a player as a youtuber)\
+
+List:
+  Enabled: true
+#scp.list (use /list)  
+#list.donor (List a player as a donor)
+#list.staff (List a player as a staff)
+
+Fly:
+  Enabled: true
+#scp.fly 
+
+Gamemode:
+  Enabled: true
+#scp.gamemode
+
+#=======================================================  
