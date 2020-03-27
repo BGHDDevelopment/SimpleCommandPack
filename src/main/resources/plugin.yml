@@ -1,0 +1,30 @@
+name: SimpleCommandPack
+version: ${project.version}
+main: me.noodles.scp.Main
+authors: [BGHDDevelopment]
+commands:
+  website:
+    description: website command
+  apply:
+    description: apply command
+  discord:
+    description: discord command
+  rules:
+    description: rules command
+  teamspeak:
+    description: teamspeak command
+  store:
+    description: store command
+  twitter:
+    description: store command
+  youtubers:
+    description: lists youtubers that have a permission
+  scphelp:
+    description: help commands
+  list:
+    description: list command
+  fly:
+    description: fly
+  gm:
+    aliases: gamemode
+    description: Change your gamemode
