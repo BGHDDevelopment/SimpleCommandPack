@@ -34,7 +34,7 @@ public class Main extends JavaPlugin implements Listener {
         this.reloadConfig();
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading commands...");
         this.getCommand("discord").setExecutor(new Discord(this));
-        this.getCommand("teamspeak").setExecutor(new Discord(this));
+        this.getCommand("teamspeak").setExecutor(new Teamspeak(this));
         this.getCommand("website").setExecutor(new Website());
         this.getCommand("store").setExecutor(new Store());
         this.getCommand("apply").setExecutor(new Apply(this));
