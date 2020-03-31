@@ -39,11 +39,12 @@ public class Main extends JavaPlugin implements Listener {
         this.registerCommand("gm", new GameModeCommand(this));
         this.registerCommand("discord", new Discord(this));
         this.registerCommand("twitter", new Twitter(this));
+        this.registerCommand("website", new Website(this));
         this.registerCommand("fly", new FlyCommand(this));
         this.registerCommand("apply", new Apply(this));
         this.registerCommand("rules", new Rules(this));
         this.registerCommand("store", new Store(this));
-        this.registerCommand("website", new Website());
+
         this.registerCommand("scphelp", new HelpMessage());
         this.registerCommand("youtubers", new YouTubersList());
         this.registerCommand("list", new List());
