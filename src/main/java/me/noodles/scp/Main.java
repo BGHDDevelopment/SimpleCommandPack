@@ -9,6 +9,7 @@ import me.noodles.scp.messagecommands.*;
 import me.noodles.scp.updatechecker.UpdateChecker;
 import me.noodles.scp.updatechecker.UpdateJoinEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -33,18 +34,20 @@ public class Main extends JavaPlugin implements Listener {
         this.saveDefaultConfig();
         this.reloadConfig();
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading commands...");
-        this.getCommand("discord").setExecutor(new Discord(this));
-        this.getCommand("teamspeak").setExecutor(new Teamspeak(this));
-        this.getCommand("website").setExecutor(new Website());
-        this.getCommand("store").setExecutor(new Store());
-        this.getCommand("apply").setExecutor(new Apply(this));
-        this.getCommand("rules").setExecutor(new Rules());
-        this.getCommand("twitter").setExecutor(new Twitter());
-        this.getCommand("scphelp").setExecutor(new HelpMessage());
-        this.getCommand("youtubers").setExecutor(new YouTubersList());
-        this.getCommand("list").setExecutor(new List());
-        this.getCommand("fly").setExecutor(new FlyCommand(this));
-        this.getCommand("gm").setExecutor(new GameModeCommand(this));
+
+        this.registerCommand("teamspeak", new Teamspeak(this));
+        this.registerCommand("gm", new GameModeCommand(this));
+        this.registerCommand("discord", new Discord(this));
+        this.registerCommand("fly", new FlyCommand(this));
+        this.registerCommand("apply", new Apply(this));
+        this.registerCommand("twitter", new Twitter());
+        this.registerCommand("website", new Website());
+        this.registerCommand("store", new Store());
+        this.registerCommand("rules", new Rules());
+        this.registerCommand("scphelp", new HelpMessage());
+        this.registerCommand("youtubers", new YouTubersList());
+        this.registerCommand("list", new List());
+
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading events...");
         registerEvents(this, new YTlogin(), new YTLeave());
         registerEvents(this, new LoginEvent(), new LeaveEvent());
@@ -82,7 +85,11 @@ public class Main extends JavaPlugin implements Listener {
         Main.Donor = new ArrayList<>();
     }
 
-    public static void registerEvents(final Plugin plugin, final Listener... listeners) {
+    private void registerCommand(final String command, final CommandExecutor executor) {
+        this.getCommand(command).setExecutor(executor);
+    }
+
+    private void registerEvents(final Plugin plugin, final Listener... listeners) {
         for (final Listener listener : listeners) {
             Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
         }
