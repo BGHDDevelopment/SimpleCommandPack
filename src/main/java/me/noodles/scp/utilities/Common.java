@@ -17,7 +17,7 @@ public final class Common {
     public static CommandSender CONSOLE = Bukkit.getConsoleSender();
 
     private final static String INFO_PREFIX = "&8[&9&li&r&8] &7";
-    private final static String SUCCESS_PREFIX = "&8[&2\u2714&8] &7";
+    private final static String SUCCESS_PREFIX = "&8[&2\u2714&8] &a";
     private final static String WARN_PREFIX = "&8[&6&l!&r&8] &6";
     private final static String ERROR_PREFIX = "&8[&4\u2715&8] &c";
     private final static String QUESTION_PREFIX = "&8[&a?&8] &7";
@@ -92,6 +92,22 @@ public final class Common {
      */
     public static void broadcast(final String... messages) {
         Arrays.stream(messages).map(Common::translate).forEach(Bukkit::broadcastMessage);
+    }
+
+    /**
+     * Capitalize a message.
+     * <p>
+     * Thank you Stack Overflow.
+     *
+     * @param message Message to capitalize
+     * @return Capitalized message
+     */
+    public static String capitalize(final String message) {
+        if (message == null || message.length() == 0) {
+            return message;
+        }
+
+        return message.substring(0, 1).toUpperCase() + message.substring(1).toLowerCase();
     }
 
     /**

@@ -1,7 +1,7 @@
 package me.noodles.scp;
 
 import me.noodles.scp.commands.admin.FlyCommand;
-import me.noodles.scp.commands.admin.GamemodeCommand;
+import me.noodles.scp.commands.admin.GameModeCommand;
 import me.noodles.scp.events.*;
 import me.noodles.scp.list.List;
 import me.noodles.scp.list.YouTubersList;
@@ -44,7 +44,7 @@ public class Main extends JavaPlugin implements Listener {
         this.getCommand("youtubers").setExecutor(new YouTubersList());
         this.getCommand("list").setExecutor(new List());
         this.getCommand("fly").setExecutor(new FlyCommand(this));
-        this.getCommand("gm").setExecutor(new GamemodeCommand());
+        this.getCommand("gm").setExecutor(new GameModeCommand(this));
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading events...");
         registerEvents(this, new YTlogin(), new YTLeave());
         registerEvents(this, new LoginEvent(), new LeaveEvent());
