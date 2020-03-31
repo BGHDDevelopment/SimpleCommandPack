@@ -17,17 +17,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 
-public class Main extends JavaPlugin implements Listener {
+public final class SCP extends JavaPlugin implements Listener {
 
     public static ArrayList<String> youtuber;
     public static ArrayList<String> onlineStaff;
     public static ArrayList<String> Donor;
-    public static Main plugin;
+    public static SCP plugin;
 
 
     @Override
     public void onEnable() {
-        Main.plugin = this;
+        SCP.plugin = this;
         final PluginDescriptionFile VarUtilType = this.getDescription();
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " starting...");
         this.saveDefaultConfig();
@@ -73,14 +73,14 @@ public class Main extends JavaPlugin implements Listener {
 
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public static Main getPlugin() {
-        return (Main) getPlugin((Class) Main.class);
+    public static SCP getPlugin() {
+        return (SCP) getPlugin((Class) SCP.class);
     }
 
     static {
-        Main.youtuber = new ArrayList<>();
-        Main.onlineStaff = new ArrayList<>();
-        Main.Donor = new ArrayList<>();
+        SCP.youtuber = new ArrayList<>();
+        SCP.onlineStaff = new ArrayList<>();
+        SCP.Donor = new ArrayList<>();
     }
 
     private void registerCommand(final String command, final CommandExecutor executor) {

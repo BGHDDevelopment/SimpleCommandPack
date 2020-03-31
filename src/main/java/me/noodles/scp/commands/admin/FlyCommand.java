@@ -1,6 +1,6 @@
 package me.noodles.scp.commands.admin;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 import me.noodles.scp.utilities.Common;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,9 +12,9 @@ import java.util.List;
 
 public final class FlyCommand implements TabExecutor {
 
-    private Main plugin;
+    private SCP plugin;
 
-    public FlyCommand(Main plugin) {
+    public FlyCommand(SCP plugin) {
         this.plugin = plugin;
     }
 
@@ -55,7 +55,7 @@ public final class FlyCommand implements TabExecutor {
         return Collections.emptyList();
     }
 
-    public Main getPlugin() {
+    public SCP getPlugin() {
         return plugin;
     }
 

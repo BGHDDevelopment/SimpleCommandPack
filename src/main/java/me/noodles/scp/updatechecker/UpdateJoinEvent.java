@@ -2,7 +2,7 @@ package me.noodles.scp.updatechecker;
 
 import org.bukkit.event.player.*;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
@@ -10,9 +10,9 @@ import org.bukkit.event.*;
 
 public class UpdateJoinEvent implements Listener {
 
-    private Main plugin;
+    private SCP plugin;
 
-    public UpdateJoinEvent(Main plugin) {
+    public UpdateJoinEvent(SCP plugin) {
         this.plugin = plugin;
     }
 
@@ -37,7 +37,7 @@ public class UpdateJoinEvent implements Listener {
         }
     }
 
-    public Main getPlugin() {
+    public SCP getPlugin() {
         return plugin;
     }
 

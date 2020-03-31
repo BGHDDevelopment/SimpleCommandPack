@@ -6,16 +6,16 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 
 import java.util.Collections;
 import java.util.List;
 
 public final class Teamspeak implements TabExecutor {
 
-	private Main plugin;
+	private SCP plugin;
 
-	public Teamspeak(Main plugin) {
+	public Teamspeak(SCP plugin) {
 		this.plugin = plugin;
 	}
 
@@ -45,7 +45,7 @@ public final class Teamspeak implements TabExecutor {
 		return Collections.emptyList();
 	}
 
-	public Main getPlugin() {
+	public SCP getPlugin() {
 		return plugin;
 	}
 

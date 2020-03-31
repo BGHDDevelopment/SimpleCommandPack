@@ -4,16 +4,16 @@ import me.noodles.scp.factories.GameModeFactory;
 import me.noodles.scp.utilities.Common;
 import org.bukkit.util.StringUtil;
 import org.bukkit.command.*;
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 import org.bukkit.entity.*;
 import org.bukkit.*;
 import java.util.*;
 
 public final class GameModeCommand implements TabExecutor {
 
-    private Main plugin;
+    private SCP plugin;
 
-    public GameModeCommand(Main plugin) {
+    public GameModeCommand(SCP plugin) {
         this.plugin = plugin;
     }
 
@@ -90,7 +90,7 @@ public final class GameModeCommand implements TabExecutor {
         }
     }
 
-    public Main getPlugin() {
+    public SCP getPlugin() {
         return plugin;
     }
 

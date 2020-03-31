@@ -2,7 +2,7 @@ package me.noodles.scp.events;
 
 import org.bukkit.event.player.*;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
@@ -14,8 +14,8 @@ public class LeaveEventDonor implements Listener
         final Player p = e.getPlayer();
         if (p.hasPermission("list.donor")) {
             final String playername = p.getName().toString();
-            if (Main.Donor.contains(playername)) {
-                Main.Donor.remove(playername);
+            if (SCP.Donor.contains(playername)) {
+                SCP.Donor.remove(playername);
             }
         }
     }
