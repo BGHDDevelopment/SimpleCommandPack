@@ -10,10 +10,10 @@ Update:
 #Enables if there is a message on-join when the plugin is outdated. 
 #=======================================================
 Messages:
-  WebsiteMessage: '&ewww.example.com - &cchange in the config.yml'
+  WebsiteMessage: '&ewww.example.com - &cChange in the config.yml'
   DiscordMessage: '&ediscord.example.com &cChange discord link in the config.yml'
   TeamspeakMessage: '&eteamspeak.example.com &cChange ts link in the config.yml'
-  StoreMessage: '&store.example.com &cChange store link in the config.yml'
+  StoreMessage: '&estore.example.com &cChange store link in the config.yml'
   ApplyMessage: '&eapply.example.com &cChange apply link in the config.yml'
   TwitterMessage: '&etwitter.example.com &cChange apply link in the config.yml'
   RulesMessage: '&eRules! &cChange apply link in the config.yml'
