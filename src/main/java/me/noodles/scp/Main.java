@@ -43,7 +43,7 @@ public class Main extends JavaPlugin implements Listener {
         this.getCommand("scphelp").setExecutor(new HelpMessage());
         this.getCommand("youtubers").setExecutor(new YouTubersList());
         this.getCommand("list").setExecutor(new List());
-        this.getCommand("fly").setExecutor(new FlyCommand());
+        this.getCommand("fly").setExecutor(new FlyCommand(this));
         this.getCommand("gm").setExecutor(new GamemodeCommand());
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading events...");
         registerEvents(this, new YTlogin(), new YTLeave());
