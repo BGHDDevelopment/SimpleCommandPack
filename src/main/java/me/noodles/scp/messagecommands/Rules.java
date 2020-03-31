@@ -13,12 +13,6 @@ import java.util.List;
 
 public final class Rules implements TabExecutor {
 
-	private SCP plugin;
-
-	public Rules(SCP plugin) {
-		this.plugin = plugin;
-	}
-
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
 		if (getPlugin().getConfig().getBoolean("Rules.Enabled")) {
@@ -46,7 +40,7 @@ public final class Rules implements TabExecutor {
 	}
 
 	public SCP getPlugin() {
-		return plugin;
+		return SCP.getInstance();
 	}
 
 }

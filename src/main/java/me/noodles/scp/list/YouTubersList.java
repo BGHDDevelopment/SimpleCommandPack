@@ -10,12 +10,13 @@ import org.bukkit.*;
 
 public class YouTubersList implements CommandExecutor
 {
+
     public boolean onCommand(final CommandSender sender, final Command cmd, final String commandLabel, final String[] args) {
     	if (!(sender instanceof Player)){
             Bukkit.getServer().getLogger().info("Only players can do this!");
             return true;
     		}
-		if (SCP.getPlugin().getConfig().getBoolean("YouTubers.Enabled") == true){
+		if (getPlugin().getConfig().getBoolean("YouTubers.Enabled") == true){
     	if (cmd.getName().equalsIgnoreCase("youtubers")) {
         	Player p = (Player)sender;
         	if (sender.hasPermission("scp.youtubers"))
@@ -37,4 +38,9 @@ public class YouTubersList implements CommandExecutor
 		}
         return true;
     }
+
+    public SCP getPlugin() {
+        return SCP.getInstance();
+    }
+
 }

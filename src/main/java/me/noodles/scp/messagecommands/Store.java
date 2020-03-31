@@ -13,12 +13,6 @@ import java.util.List;
 
 public final class Store implements TabExecutor {
 
-	private SCP plugin;
-
-	public Store(SCP plugin) {
-		this.plugin = plugin;
-	}
-
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
 		if (getPlugin().getConfig().getBoolean("Store.Enabled")) {
@@ -46,7 +40,7 @@ public final class Store implements TabExecutor {
 	}
 
 	public SCP getPlugin() {
-		return plugin;
+		return SCP.getInstance();
 	}
 
 }

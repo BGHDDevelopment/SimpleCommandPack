@@ -19,41 +19,45 @@ import java.util.ArrayList;
 
 public final class SCP extends JavaPlugin implements Listener {
 
+    private static SCP instance;
+
     public static ArrayList<String> youtuber;
     public static ArrayList<String> onlineStaff;
     public static ArrayList<String> Donor;
-    public static SCP plugin;
-
 
     @Override
     public void onEnable() {
-        SCP.plugin = this;
+        instance = this;
+
         final PluginDescriptionFile VarUtilType = this.getDescription();
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " starting...");
+
         this.saveDefaultConfig();
         this.reloadConfig();
+
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading commands...");
 
-        this.registerCommand("teamspeak", new Teamspeak(this));
-        this.registerCommand("gm", new GameModeCommand(this));
-        this.registerCommand("discord", new Discord(this));
-        this.registerCommand("twitter", new Twitter(this));
-        this.registerCommand("website", new Website(this));
-        this.registerCommand("fly", new FlyCommand(this));
-        this.registerCommand("apply", new Apply(this));
-        this.registerCommand("rules", new Rules(this));
-        this.registerCommand("store", new Store(this));
+        this.registerCommand("teamspeak", new Teamspeak());
+        this.registerCommand("gm", new GameModeCommand());
+        this.registerCommand("discord", new Discord());
+        this.registerCommand("twitter", new Twitter());
+        this.registerCommand("website", new Website());
+        this.registerCommand("fly", new FlyCommand());
+        this.registerCommand("apply", new Apply());
+        this.registerCommand("rules", new Rules());
+        this.registerCommand("store", new Store());
 
         this.registerCommand("scphelp", new HelpMessage());
         this.registerCommand("youtubers", new YouTubersList());
         this.registerCommand("list", new List());
 
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading events...");
+
         registerEvents(this, new YTlogin(), new YTLeave());
         registerEvents(this, new LoginEvent(), new LeaveEvent());
         registerEvents(this, new JoinEventDonors(), new LeaveEventDonor());
-        registerEvents(this, new UpdateJoinEvent(this));
-        this.setEnabled(true);
+        registerEvents(this, new UpdateJoinEvent());
+
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " started!");
 
         if (getConfig().getBoolean("CheckForUpdates.Enabled", true)) {
@@ -71,16 +75,14 @@ public final class SCP extends JavaPlugin implements Listener {
 
     }
 
-
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public static SCP getPlugin() {
-        return (SCP) getPlugin((Class) SCP.class);
-    }
-
     static {
         SCP.youtuber = new ArrayList<>();
         SCP.onlineStaff = new ArrayList<>();
         SCP.Donor = new ArrayList<>();
+    }
+
+    public synchronized static SCP getInstance() {
+        return instance;
     }
 
     private void registerCommand(final String command, final CommandExecutor executor) {

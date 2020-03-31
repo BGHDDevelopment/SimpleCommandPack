@@ -12,12 +12,6 @@ import java.util.List;
 
 public final class FlyCommand implements TabExecutor {
 
-    private SCP plugin;
-
-    public FlyCommand(SCP plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
 
@@ -56,7 +50,7 @@ public final class FlyCommand implements TabExecutor {
     }
 
     public SCP getPlugin() {
-        return plugin;
+        return SCP.getInstance();
     }
 
 }

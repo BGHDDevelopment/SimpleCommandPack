@@ -13,12 +13,6 @@ import java.util.List;
 
 public final class Discord implements TabExecutor {
 
-	private SCP plugin;
-
-	public Discord(SCP plugin) {
-		this.plugin = plugin;
-	}
-
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
 		if (getPlugin().getConfig().getBoolean("Discord.Enabled")) {
@@ -45,8 +39,6 @@ public final class Discord implements TabExecutor {
 		return Collections.emptyList();
 	}
 
-	public SCP getPlugin() {
-		return plugin;
-	}
+	public SCP getPlugin() { return SCP.getInstance(); }
 
 }

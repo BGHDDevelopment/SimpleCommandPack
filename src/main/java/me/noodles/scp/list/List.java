@@ -9,12 +9,13 @@ import org.bukkit.*;
 
 public class List implements CommandExecutor
 {
+
     public boolean onCommand(final CommandSender sender, final Command cmd, final String commandLabel, final String[] args) {
     	if (!(sender instanceof Player)){
             Bukkit.getServer().getLogger().info("Only players can do this!");
             return true;
     		}
-		if (SCP.getPlugin().getConfig().getBoolean("List.Enabled") == true){
+		if (getPlugin().getConfig().getBoolean("List.Enabled") == true){
         if (cmd.getName().equalsIgnoreCase("list")) {
         	Player p = (Player)sender;
             int playerCount = Bukkit.getOnlinePlayers().size();
@@ -47,4 +48,7 @@ public class List implements CommandExecutor
         
         return false;
     }
+
+    public SCP getPlugin() { return SCP.getInstance(); }
+
 }

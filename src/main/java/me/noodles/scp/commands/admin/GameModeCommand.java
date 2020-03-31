@@ -11,12 +11,6 @@ import java.util.*;
 
 public final class GameModeCommand implements TabExecutor {
 
-    private SCP plugin;
-
-    public GameModeCommand(SCP plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         final GameModeFactory factory = new GameModeFactory();
@@ -91,7 +85,7 @@ public final class GameModeCommand implements TabExecutor {
     }
 
     public SCP getPlugin() {
-        return plugin;
+        return SCP.getInstance();
     }
 
 }

@@ -10,12 +10,6 @@ import org.bukkit.event.*;
 
 public class UpdateJoinEvent implements Listener {
 
-    private SCP plugin;
-
-    public UpdateJoinEvent(SCP plugin) {
-        this.plugin = plugin;
-    }
-
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
@@ -38,7 +32,7 @@ public class UpdateJoinEvent implements Listener {
     }
 
     public SCP getPlugin() {
-        return plugin;
+        return SCP.getInstance();
     }
 
 }
