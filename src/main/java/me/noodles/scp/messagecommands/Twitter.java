@@ -28,7 +28,7 @@ public final class Twitter implements TabExecutor {
 				final Player player = (Player) sender;
 
 				if (player.hasPermission("scp.twitter")) {
-					Common.tell(player, getPlugin().getConfig().getString("Messages.STwitterMessage"));
+					Common.tell(player, getPlugin().getConfig().getString("Messages.TwitterMessage"));
 
 					return true;
 				}
