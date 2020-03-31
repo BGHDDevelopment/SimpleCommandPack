@@ -37,7 +37,7 @@ public class Main extends JavaPlugin implements Listener {
         this.getCommand("teamspeak").setExecutor(new Discord());
         this.getCommand("website").setExecutor(new Website());
         this.getCommand("store").setExecutor(new Store());
-        this.getCommand("apply").setExecutor(new Apply());
+        this.getCommand("apply").setExecutor(new Apply(this));
         this.getCommand("rules").setExecutor(new Rules());
         this.getCommand("twitter").setExecutor(new Twitter());
         this.getCommand("scphelp").setExecutor(new HelpMessage());
