@@ -9,7 +9,7 @@ import org.bukkit.entity.*;
 import org.bukkit.*;
 import java.util.*;
 
-public class GameModeCommand implements TabExecutor {
+public final class GameModeCommand implements TabExecutor {
 
     private Main plugin;
 

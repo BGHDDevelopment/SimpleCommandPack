@@ -3,11 +3,17 @@ package me.noodles.scp.messagecommands;
 import org.bukkit.command.*;
 import net.md_5.bungee.api.*;
 
-public class HelpMessage implements CommandExecutor
-{
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("scphelp")) {
+import java.util.Collections;
+import java.util.List;
+
+public final class HelpMessage implements TabExecutor {
+
+    public boolean onCommand(final CommandSender sender, final Command command, final String commandLabel, final String[] args) {
+
+        if (command.getName().equalsIgnoreCase("scphelp")) {
+
             if (sender.hasPermission("scp.help")) {
+
                 sender.sendMessage(ChatColor.YELLOW + "=========================");
                 sender.sendMessage(ChatColor.RED + "Plugin Info:");
                 sender.sendMessage(ChatColor.DARK_AQUA + "Plugin made by BGHDNetwork!");
@@ -36,11 +42,21 @@ public class HelpMessage implements CommandExecutor
                 sender.sendMessage(ChatColor.RED + "Support:");
                 sender.sendMessage(ChatColor.DARK_AQUA + "https://discord.gg/QbbXPNG");
                 sender.sendMessage(ChatColor.YELLOW + "=========================");
-            }
-            else {
+
+            } else {
                 sender.sendMessage(ChatColor.RED + "(!) You don't have permssion to use this command!");
             }
+
+            return true;
+
         }
+
         return false;
     }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        return Collections.emptyList();
+    }
+
 }

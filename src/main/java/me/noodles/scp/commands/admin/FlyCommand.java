@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.Collections;
 import java.util.List;
 
-public class FlyCommand implements TabExecutor {
+public final class FlyCommand implements TabExecutor {
 
     private Main plugin;
 
