@@ -22,7 +22,6 @@ public class Main extends JavaPlugin implements Listener {
     public static ArrayList<String> youtuber;
     public static ArrayList<String> onlineStaff;
     public static ArrayList<String> Donor;
-    private UpdateChecker checker;
     public static Main plugin;
 
 
@@ -53,25 +52,23 @@ public class Main extends JavaPlugin implements Listener {
         registerEvents(this, new YTlogin(), new YTLeave());
         registerEvents(this, new LoginEvent(), new LeaveEvent());
         registerEvents(this, new JoinEventDonors(), new LeaveEventDonor());
-        registerEvents(this, new UpdateJoinEvent());
+        registerEvents(this, new UpdateJoinEvent(this));
         this.setEnabled(true);
         this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " started!");
-        this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " checking for updates...");
-        this.checker = new UpdateChecker(this);
-        if (this.checker.isConnected()) {
-            if (this.checker.hasUpdate()) {
-                getServer().getConsoleSender().sendMessage("------------------------");
-                getServer().getConsoleSender().sendMessage("SCP is outdated!");
-                getServer().getConsoleSender().sendMessage("Newest version: " + this.checker.getLatestVersion());
-                getServer().getConsoleSender().sendMessage("Your version: " + Main.plugin.getDescription().getVersion());
-                getServer().getConsoleSender().sendMessage("Please Update Here: https://www.spigotmc.org/resources/45204");
-                getServer().getConsoleSender().sendMessage("------------------------");
-            } else {
-                getServer().getConsoleSender().sendMessage("------------------------");
-                getServer().getConsoleSender().sendMessage("SCP is up to date!");
-                getServer().getConsoleSender().sendMessage("------------------------");
-            }
+
+        if (getConfig().getBoolean("CheckForUpdates.Enabled", true)) {
+            new UpdateChecker(this, 45204).getLatestVersion(version -> {
+                getLogger().info("Checking for Updates ...");
+
+                if (getDescription().getVersion().equalsIgnoreCase(version)) {
+                    getLogger().info("No new version available");
+                } else {
+                    getLogger().warning(String.format("Newest version: %s is out! You are running version: %s", version, getDescription().getVersion()));
+                    getLogger().warning("Please Update Here: http://www.spigotmc.org/resources/45204");
+                }
+            });
         }
+
     }
 
 

@@ -9,6 +9,11 @@ Update:
 #scp.update
 #Enables if there is a message on-join when the plugin is outdated. 
 #=======================================================
+CheckForUpdates:
+  Enabled: true
+#Enables a message in console if the plugin is outdated.
+#=======================================================
+
 Messages:
   WebsiteMessage: '&ewww.example.com - &cChange in the config.yml'
   DiscordMessage: '&ediscord.example.com &cChange discord link in the config.yml'
