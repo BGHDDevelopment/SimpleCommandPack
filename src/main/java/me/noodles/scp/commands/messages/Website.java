@@ -1,4 +1,4 @@
-package me.noodles.scp.messagecommands;
+package me.noodles.scp.commands.messages;
 
 import me.noodles.scp.utilities.Common;
 import org.bukkit.command.CommandSender;

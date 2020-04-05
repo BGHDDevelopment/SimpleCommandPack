@@ -1,4 +1,4 @@
-package me.noodles.scp.messagecommands;
+package me.noodles.scp.commands.messages;
 
 import org.bukkit.command.*;
 import net.md_5.bungee.api.*;

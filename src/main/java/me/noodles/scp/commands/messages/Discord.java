@@ -1,4 +1,4 @@
-package me.noodles.scp.messagecommands;
+package me.noodles.scp.commands.messages;
 
 import me.noodles.scp.utilities.Common;
 import org.bukkit.command.CommandSender;
@@ -11,16 +11,16 @@ import me.noodles.scp.SCP;
 import java.util.Collections;
 import java.util.List;
 
-public final class Rules implements TabExecutor {
+public final class Discord implements TabExecutor {
 
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-		if (getPlugin().getConfig().getBoolean("Rules.Enabled")) {
+		if (getPlugin().getConfig().getBoolean("Discord.Enabled")) {
 			if (sender instanceof Player) {
 				final Player player = (Player) sender;
 
-				if (player.hasPermission("scp.rules")) {
-					Common.tell(player, getPlugin().getConfig().getString("Messages.RulesMessage"));
+				if (player.hasPermission("scp.discord")) {
+					Common.tell(player, getPlugin().getConfig().getString("Messages.DiscordMessage"));
 
 					return true;
 				}
@@ -39,8 +39,6 @@ public final class Rules implements TabExecutor {
 		return Collections.emptyList();
 	}
 
-	public SCP getPlugin() {
-		return SCP.getInstance();
-	}
+	public SCP getPlugin() { return SCP.getInstance(); }
 
 }

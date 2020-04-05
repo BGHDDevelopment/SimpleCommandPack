@@ -1,4 +1,4 @@
-package me.noodles.scp.messagecommands;
+package me.noodles.scp.commands.messages;
 
 import me.noodles.scp.utilities.Common;
 import org.bukkit.command.CommandSender;
@@ -11,16 +11,16 @@ import me.noodles.scp.SCP;
 import java.util.Collections;
 import java.util.List;
 
-public final class Twitter implements TabExecutor {
+public final class Teamspeak implements TabExecutor {
 
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-		if (getPlugin().getConfig().getBoolean("Twitter.Enabled")) {
+		if (getPlugin().getConfig().getBoolean("Teamspeak.Enabled")) {
 			if (sender instanceof Player) {
 				final Player player = (Player) sender;
 
-				if (player.hasPermission("scp.twitter")) {
-					Common.tell(player, getPlugin().getConfig().getString("Messages.TwitterMessage"));
+				if (player.hasPermission("scp.teamspeak")) {
+					Common.tell(player, getPlugin().getConfig().getString("Messages.TeamspeakMessage"));
 
 					return true;
 				}
@@ -39,6 +39,8 @@ public final class Twitter implements TabExecutor {
 		return Collections.emptyList();
 	}
 
-	public SCP getPlugin() { return SCP.getInstance(); }
+	public SCP getPlugin() {
+		return SCP.getInstance();
+	}
 
 }
