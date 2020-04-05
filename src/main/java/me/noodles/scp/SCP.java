@@ -2,17 +2,16 @@ package me.noodles.scp;
 
 import me.noodles.scp.commands.admin.FlyCommand;
 import me.noodles.scp.commands.admin.GameModeCommand;
+import me.noodles.scp.commands.messages.*;
 import me.noodles.scp.events.*;
 import me.noodles.scp.list.List;
 import me.noodles.scp.list.YouTubersList;
-import me.noodles.scp.messagecommands.*;
 import me.noodles.scp.updatechecker.UpdateChecker;
 import me.noodles.scp.updatechecker.UpdateJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -29,13 +28,14 @@ public final class SCP extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
 
-        final PluginDescriptionFile VarUtilType = this.getDescription();
-        this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " starting...");
+        final String version = this.getDescription().getVersion();
+
+        this.getLogger().info(String.format("SimpleCommandPack V %s starting ...", version));
 
         this.saveDefaultConfig();
         this.reloadConfig();
 
-        this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading commands...");
+        this.getLogger().info(String.format("SimpleCommandPack V %s loading commands ...", version));
 
         this.registerCommand("teamspeak", new Teamspeak());
         this.registerCommand("gm", new GameModeCommand());
@@ -51,23 +51,23 @@ public final class SCP extends JavaPlugin implements Listener {
         this.registerCommand("youtubers", new YouTubersList());
         this.registerCommand("list", new List());
 
-        this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " loading events...");
+        this.getLogger().info(String.format("SimpleCommandPack V %s loading events ...", version));
 
         registerEvents(this, new YTlogin(), new YTLeave());
         registerEvents(this, new LoginEvent(), new LeaveEvent());
         registerEvents(this, new JoinEventDonors(), new LeaveEventDonor());
         registerEvents(this, new UpdateJoinEvent());
 
-        this.getLogger().info("SimpleCommandPack V" + VarUtilType.getVersion() + " started!");
+        this.getLogger().info(String.format("SimpleCommandPack V %s started ...", version));
 
         if (getConfig().getBoolean("CheckForUpdates.Enabled", true)) {
-            new UpdateChecker(this, 45204).getLatestVersion(version -> {
+            new UpdateChecker(this, 45204).getLatestVersion(remoteVersion -> {
                 getLogger().info("Checking for Updates ...");
 
-                if (getDescription().getVersion().equalsIgnoreCase(version)) {
+                if (getDescription().getVersion().equalsIgnoreCase(remoteVersion)) {
                     getLogger().info("No new version available");
                 } else {
-                    getLogger().warning(String.format("Newest version: %s is out! You are running version: %s", version, getDescription().getVersion()));
+                    getLogger().warning(String.format("Newest version: %s is out! You are running version: %s", remoteVersion, getDescription().getVersion()));
                     getLogger().warning("Please Update Here: http://www.spigotmc.org/resources/45204");
                 }
             });
