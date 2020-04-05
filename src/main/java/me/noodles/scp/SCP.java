@@ -30,12 +30,12 @@ public final class SCP extends JavaPlugin implements Listener {
 
         final String version = this.getDescription().getVersion();
 
-        this.getLogger().info(String.format("SimpleCommandPack V %s starting ...", version));
+        this.getLogger().info(String.format("SimpleCommandPack v%s starting ...", version));
 
         this.saveDefaultConfig();
         this.reloadConfig();
 
-        this.getLogger().info(String.format("SimpleCommandPack V %s loading commands ...", version));
+        this.getLogger().info(String.format("SimpleCommandPack v%s loading commands ...", version));
 
         this.registerCommand("teamspeak", new Teamspeak());
         this.registerCommand("gm", new GameModeCommand());
@@ -51,14 +51,14 @@ public final class SCP extends JavaPlugin implements Listener {
         this.registerCommand("youtubers", new YouTubersList());
         this.registerCommand("list", new List());
 
-        this.getLogger().info(String.format("SimpleCommandPack V %s loading events ...", version));
+        this.getLogger().info(String.format("SimpleCommandPack v%s loading events ...", version));
 
         registerEvents(this, new YTlogin(), new YTLeave());
         registerEvents(this, new LoginEvent(), new LeaveEvent());
         registerEvents(this, new JoinEventDonors(), new LeaveEventDonor());
         registerEvents(this, new UpdateJoinEvent());
 
-        this.getLogger().info(String.format("SimpleCommandPack V %s started ...", version));
+        this.getLogger().info(String.format("SimpleCommandPack v%s started ...", version));
 
         if (getConfig().getBoolean("CheckForUpdates.Enabled", true)) {
             new UpdateChecker(this, 45204).getLatestVersion(remoteVersion -> {
