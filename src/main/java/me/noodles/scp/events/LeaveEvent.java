@@ -2,7 +2,7 @@ package me.noodles.scp.events;
 
 import org.bukkit.event.player.*;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
@@ -14,8 +14,8 @@ public class LeaveEvent implements Listener
         final Player p = e.getPlayer();
         if (p.hasPermission("list.staff")) {
             final String playername = p.getName().toString();
-            if (Main.onlineStaff.contains(playername)) {
-                Main.onlineStaff.remove(playername);
+            if (SCP.onlineStaff.contains(playername)) {
+                SCP.onlineStaff.remove(playername);
             }
         }
     }

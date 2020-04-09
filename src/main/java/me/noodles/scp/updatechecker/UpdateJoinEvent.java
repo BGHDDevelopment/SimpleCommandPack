@@ -2,34 +2,37 @@ package me.noodles.scp.updatechecker;
 
 import org.bukkit.event.player.*;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 
-public class UpdateJoinEvent implements Listener
-{
-	
-	public UpdateChecker checker;
-	
+public class UpdateJoinEvent implements Listener {
+
     @EventHandler
-    public void onJoin(final PlayerJoinEvent e) {
-    	Player p = e.getPlayer();
-    	if (p.hasPermission("scp.update")) {
-    		if (Main.getPlugin().getConfig().getBoolean("Update.Enabled") == true){
-    		this.checker = new UpdateChecker(Main.plugin);
-                        if (this.checker.isConnected()) {
-                            if (this.checker.hasUpdate()) {
-                            	p.sendMessage(ChatColor.GRAY + "=========================");
-                                p.sendMessage(ChatColor.RED + "SCP is outdated!");
-                                p.sendMessage(ChatColor.GREEN + "Newest version: " + this.checker.getLatestVersion());
-                                p.sendMessage(ChatColor.RED + "Your version: " + Main.plugin.getDescription().getVersion());
-                                p.sendMessage(ChatColor.GRAY + "=========================");
-                            }
-                        }               
-       }
+    public void onJoin(final PlayerJoinEvent event) {
+        final Player player = event.getPlayer();
+
+        if (getPlugin().getConfig().getBoolean("Update.Enabled")) {
+            if (player.hasPermission("scp.update")) {
+                if (getPlugin().getConfig().getBoolean("CheckForUpdates.Enabled", true)) {
+                    new UpdateChecker(getPlugin(), 45204).getLatestVersion(version -> {
+                        if (!getPlugin().getDescription().getVersion().equalsIgnoreCase(version)) {
+                            player.sendMessage(ChatColor.GRAY + "=========================");
+                            player.sendMessage(ChatColor.RED + "SCP is outdated!");
+                            player.sendMessage(ChatColor.GREEN + "Newest version: " + version);
+                            player.sendMessage(ChatColor.RED + "Your version: " + getPlugin().getDescription().getVersion());
+                            player.sendMessage(ChatColor.GRAY + "=========================");
+                        }
+                    });
+                }
+            }
+        }
     }
+
+    public SCP getPlugin() {
+        return SCP.getInstance();
+    }
+
 }
-}
-    

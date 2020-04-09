@@ -2,7 +2,7 @@ package me.noodles.scp.events;
 
 import org.bukkit.event.player.*;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
@@ -14,7 +14,7 @@ public class LoginEvent implements Listener
         final Player p = e.getPlayer();
         if (p.hasPermission("list.staff") || p.isOp()) {
             final String playername = p.getName().toString();
-            Main.onlineStaff.add(playername);
+            SCP.onlineStaff.add(playername);
         }
     }
 }

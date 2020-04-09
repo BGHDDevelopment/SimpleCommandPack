@@ -3,23 +3,24 @@ package me.noodles.scp.list;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
-import me.noodles.scp.Main;
+import me.noodles.scp.SCP;
 import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.*;
 
 public class YouTubersList implements CommandExecutor
 {
+
     public boolean onCommand(final CommandSender sender, final Command cmd, final String commandLabel, final String[] args) {
     	if (!(sender instanceof Player)){
             Bukkit.getServer().getLogger().info("Only players can do this!");
             return true;
     		}
-		if (Main.getPlugin().getConfig().getBoolean("YouTubers.Enabled") == true){
+		if (getPlugin().getConfig().getBoolean("YouTubers.Enabled") == true){
     	if (cmd.getName().equalsIgnoreCase("youtubers")) {
         	Player p = (Player)sender;
         	if (sender.hasPermission("scp.youtubers"))
-                if (Main.youtuber.isEmpty()) {
+                if (SCP.youtuber.isEmpty()) {
                     p.sendMessage(ChatColor.YELLOW + "=====================================================");
                     p.sendMessage("");
                     p.sendMessage(ChatColor.WHITE + "YouTubers: " + ChatColor.RED + "None Online!");
@@ -29,7 +30,7 @@ public class YouTubersList implements CommandExecutor
                 else {
                     p.sendMessage(ChatColor.YELLOW + "=====================================================");
                     p.sendMessage("");
-                    p.sendMessage(ChatColor.WHITE + "YouTubers: " + ChatColor.RED + Main.youtuber);
+                    p.sendMessage(ChatColor.WHITE + "YouTubers: " + ChatColor.RED + SCP.youtuber);
                     p.sendMessage("");
                     p.sendMessage(ChatColor.YELLOW + "=====================================================");
                 }
@@ -37,4 +38,9 @@ public class YouTubersList implements CommandExecutor
 		}
         return true;
     }
+
+    public SCP getPlugin() {
+        return SCP.getInstance();
+    }
+
 }
