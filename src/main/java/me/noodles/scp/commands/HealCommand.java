@@ -1,7 +1,7 @@
 package me.noodles.scp.commands;
 
-import me.noodles.scp.SCP;
 import me.noodles.scp.utilities.Common;
+import me.noodles.scp.utilities.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -30,7 +30,7 @@ public final class HealCommand implements TabExecutor {
                 if (target != null) {
                     this.healPlayer(target);
                 } else {
-                    Common.info(player, "Player is not online!");
+                    Common.info(player, Messages.PLAYER_OFFLINE);
                 }
 
                 return true;
@@ -39,7 +39,7 @@ public final class HealCommand implements TabExecutor {
             if (player.hasPermission("scp.heal")) {
                 this.healPlayer(player);
             } else {
-                Common.error(player, "You do not have permission to use this command!");
+                Common.error(player, Messages.NO_PERMISSION);
             }
 
             return true;

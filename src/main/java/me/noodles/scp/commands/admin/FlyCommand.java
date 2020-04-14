@@ -2,6 +2,7 @@ package me.noodles.scp.commands.admin;
 
 import me.noodles.scp.SCP;
 import me.noodles.scp.utilities.Common;
+import me.noodles.scp.utilities.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -31,12 +32,12 @@ public final class FlyCommand implements TabExecutor {
                     return true;
                 }
 
-                Common.error(player, "You do not have permission to use this command!");
+                Common.error(player, Messages.NO_PERMISSION);
 
                 return true;
             }
 
-            Common.tell(Common.CONSOLE, "Only players can use that command!");
+            Common.tell(Common.CONSOLE, Messages.ONLY_PLAYERS);
 
             return true;
         }

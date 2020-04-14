@@ -6,6 +6,9 @@ package me.noodles.scp.utilities;
  */
 public final class Messages {
     public static String NO_PERMISSION = "You do not have permission to use this command!";
+    public static String ONLY_PLAYERS = "Only players can use that command!";
+    public static String PLAYER_OFFLINE = "Player is not online!";
+
     public static String TIME_CHANGED = "Time set to {time}!";
 
     private Messages() {}

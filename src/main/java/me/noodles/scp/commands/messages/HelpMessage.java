@@ -1,5 +1,7 @@
 package me.noodles.scp.commands.messages;
 
+import me.noodles.scp.utilities.Common;
+import me.noodles.scp.utilities.Messages;
 import org.bukkit.command.*;
 import net.md_5.bungee.api.*;
 
@@ -44,7 +46,7 @@ public final class HelpMessage implements TabExecutor {
                 sender.sendMessage(ChatColor.YELLOW + "=========================");
 
             } else {
-                sender.sendMessage(ChatColor.RED + "(!) You don't have permssion to use this command!");
+                Common.error(sender, Messages.NO_PERMISSION);
             }
 
             return true;
