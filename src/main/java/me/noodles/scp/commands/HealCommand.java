@@ -61,8 +61,4 @@ public final class HealCommand implements TabExecutor {
         Common.success(player, "You've been healed!");
     }
 
-    public SCP getPlugin() {
-        return SCP.getInstance();
-    }
-
 }
