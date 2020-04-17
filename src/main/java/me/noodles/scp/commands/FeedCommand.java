@@ -23,11 +23,11 @@ public final class FeedCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-        if (getPlugin().getConfig().getBoolean("Feed.Enabled")) {
+        if (getPlugin().getConfig().getBoolean("Feed.Enabled", true)) {
             if (sender instanceof Player) {
                 final Player player = (Player) sender;
 
-                if (getPlugin().getConfig().getBoolean("Feed.Others.Enabled")) {
+                if (getPlugin().getConfig().getBoolean("Feed.Others.Enabled", true)) {
                     if (args.length == 1 && player.hasPermission("scp.feed.others")) {
                         final Player target = Bukkit.getPlayer(args[0]);
 

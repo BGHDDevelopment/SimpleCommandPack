@@ -17,7 +17,7 @@ public final class GameModeCommand implements TabExecutor {
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         final GameModeFactory factory = new GameModeFactory();
 
-        if (getPlugin().getConfig().getBoolean("Gamemode.Enabled")) {
+        if (getPlugin().getConfig().getBoolean("Gamemode.Enabled", true)) {
 
             if (sender instanceof Player) {
                 final Player player = (Player) sender;

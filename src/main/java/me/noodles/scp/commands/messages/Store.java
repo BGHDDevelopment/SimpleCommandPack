@@ -16,7 +16,7 @@ public final class Store implements TabExecutor {
 
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-		if (getPlugin().getConfig().getBoolean("Store.Enabled")) {
+		if (getPlugin().getConfig().getBoolean("Store.Enabled", true)) {
 			if (sender instanceof Player) {
 				final Player player = (Player) sender;
 

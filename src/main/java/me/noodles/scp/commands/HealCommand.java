@@ -22,11 +22,11 @@ public final class HealCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (getPlugin().getConfig().getBoolean("Heal.Enabled")) {
+        if (getPlugin().getConfig().getBoolean("Heal.Enabled", true)) {
             if (sender instanceof Player) {
                 final Player player = (Player) sender;
 
-                if (getPlugin().getConfig().getBoolean("Heal.Others.Enabled")) {
+                if (getPlugin().getConfig().getBoolean("Heal.Others.Enabled", true)) {
                     if (args.length == 1 && player.hasPermission("scp.heal.others")) {
                         final Player target = Bukkit.getPlayer(args[0]);
 

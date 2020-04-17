@@ -19,7 +19,7 @@ public final class NightCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (getPlugin().getConfig().getBoolean("Night.Enabled")) {
+        if (getPlugin().getConfig().getBoolean("Night.Enabled", true)) {
             if (sender instanceof Player) {
                 final Player player = (Player) sender;
 
