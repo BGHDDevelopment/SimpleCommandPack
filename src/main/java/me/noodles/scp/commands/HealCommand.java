@@ -1,5 +1,6 @@
 package me.noodles.scp.commands;
 
+import me.noodles.scp.SCP;
 import me.noodles.scp.utilities.Common;
 import me.noodles.scp.utilities.Messages;
 import org.bukkit.Bukkit;
@@ -21,28 +22,32 @@ public final class HealCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            final Player player = (Player) sender;
+        if (getPlugin().getConfig().getBoolean("Heal.Enabled")) {
+            if (sender instanceof Player) {
+                final Player player = (Player) sender;
 
-            if (args.length == 1 && player.hasPermission("scp.heal.others")) {
-                final Player target = Bukkit.getPlayer(args[0]);
+                if (getPlugin().getConfig().getBoolean("Heal.Others.Enabled")) {
+                    if (args.length == 1 && player.hasPermission("scp.heal.others")) {
+                        final Player target = Bukkit.getPlayer(args[0]);
 
-                if (target != null) {
-                    this.healPlayer(target);
+                        if (target != null) {
+                            this.healPlayer(target);
+                        } else {
+                            Common.info(player, Messages.PLAYER_OFFLINE);
+                        }
+
+                        return true;
+                    }
+                }
+
+                if (player.hasPermission("scp.heal")) {
+                    this.healPlayer(player);
                 } else {
-                    Common.info(player, Messages.PLAYER_OFFLINE);
+                    Common.error(player, Messages.NO_PERMISSION);
                 }
 
                 return true;
             }
-
-            if (player.hasPermission("scp.heal")) {
-                this.healPlayer(player);
-            } else {
-                Common.error(player, Messages.NO_PERMISSION);
-            }
-
-            return true;
         }
 
         return false;
@@ -59,6 +64,10 @@ public final class HealCommand implements TabExecutor {
         player.setFireTicks(0);
 
         Common.success(player, "You've been healed!");
+    }
+
+    public SCP getPlugin() {
+        return SCP.getInstance();
     }
 
 }
