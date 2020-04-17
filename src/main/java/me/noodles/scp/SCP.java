@@ -1,5 +1,6 @@
 package me.noodles.scp;
 
+import me.noodles.scp.commands.FeedCommand;
 import me.noodles.scp.commands.HealCommand;
 import me.noodles.scp.commands.admin.DayCommand;
 import me.noodles.scp.commands.admin.FlyCommand;
@@ -51,6 +52,7 @@ public final class SCP extends JavaPlugin implements Listener {
         this.registerCommand("store", new Store());
 
         this.registerCommand("heal", new HealCommand());
+        this.registerCommand("feed", new FeedCommand());
         this.registerCommand("night", new NightCommand());
         this.registerCommand("day", new DayCommand());
 

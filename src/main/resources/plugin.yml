@@ -31,6 +31,9 @@ commands:
   heal:
     description: Heal yourself or others
     usage: /<command> <player>
+  feed:
+    description: Feed yourself or others
+    usage: /<command> <player>
   day:
     description: Sets Time To Day
   night:
