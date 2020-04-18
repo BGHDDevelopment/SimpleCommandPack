@@ -1,6 +1,7 @@
 package me.noodles.scp.commands.messages;
 
 import me.noodles.scp.utilities.Common;
+import me.noodles.scp.utilities.Messages;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.command.Command;
@@ -15,7 +16,7 @@ public final class Discord implements TabExecutor {
 
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-		if (getPlugin().getConfig().getBoolean("Discord.Enabled")) {
+		if (getPlugin().getConfig().getBoolean("Discord.Enabled", true)) {
 			if (sender instanceof Player) {
 				final Player player = (Player) sender;
 
@@ -25,7 +26,7 @@ public final class Discord implements TabExecutor {
 					return true;
 				}
 
-				Common.error(player, "You don't have permission to use this command!");
+				Common.error(player, Messages.NO_PERMISSION);
 
 				return true;
 			}

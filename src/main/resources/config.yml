@@ -72,4 +72,24 @@ Gamemode:
   Enabled: true
 #scp.gamemode
 
+Day:
+  Enabled: true
+#scp.day
+
+Night:
+  Enabled: true
+#scp.night
+
+Heal:
+  Enabled: true
+  Others:
+    Enabled: true
+#scp.heal
+
+Feed:
+  Enabled: true
+  Others:
+    Enabled: true
+#scp.feed
+
 #=======================================================  
