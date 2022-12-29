@@ -125,7 +125,7 @@ public final class Common {
      * @return Translated message
      */
     public static String translate(final String message) {
-        return ChatColor.translateAlternateColorCodes('&', message);
+        return Color.translate(message);
     }
 
 }
