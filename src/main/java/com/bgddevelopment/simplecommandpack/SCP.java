@@ -9,15 +9,13 @@ import com.bgddevelopment.simplecommandpack.commands.admin.DayCommand;
 import com.bgddevelopment.simplecommandpack.commands.admin.FlyCommand;
 import com.bgddevelopment.simplecommandpack.commands.admin.GameModeCommand;
 import com.bgddevelopment.simplecommandpack.commands.admin.NightCommand;
-import com.bgddevelopment.simplecommandpack.events.*;
-import com.bgddevelopment.simplecommandpack.updatechecker.UpdateJoinEvent;
+import com.bgddevelopment.simplecommandpack.events.JoinLeaveEvents;
 import com.bgddevelopment.simplecommandpack.utilities.Color;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.BufferedReader;
@@ -51,10 +49,7 @@ public final class SCP extends JavaPlugin implements Listener {
 
         this.getLogger().info(String.format("SimpleCommandPack v%s loading events ...", version));
 
-        registerEvents(this, new YTlogin(), new YTLeave());
-        registerEvents(this, new LoginEvent(), new LeaveEvent());
-        registerEvents(this, new JoinEventDonors(), new LeaveEventDonor());
-        registerEvents(this, new UpdateJoinEvent());
+        Bukkit.getPluginManager().registerEvents(new JoinLeaveEvents(), this);
 
         this.getLogger().info(String.format("SimpleCommandPack v%s started ...", version));
         updateCheck(Bukkit.getConsoleSender(), true);
@@ -86,12 +81,6 @@ public final class SCP extends JavaPlugin implements Listener {
         manager.registerCommand(new NightCommand());
         manager.registerCommand(new FeedCommand());
         manager.registerCommand(new HealCommand());
-    }
-
-    private void registerEvents(final Plugin plugin, final Listener... listeners) {
-        for (final Listener listener : listeners) {
-            Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
-        }
     }
 
     public void updateCheck(CommandSender sender, boolean console) {
