@@ -1,78 +1,78 @@
 package com.bgddevelopment.simplecommandpack.commands.admin;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.*;
+import com.bgddevelopment.simplecommandpack.SCP;
 import com.bgddevelopment.simplecommandpack.factories.GameModeFactory;
 import com.bgddevelopment.simplecommandpack.utilities.Common;
 import com.bgddevelopment.simplecommandpack.utilities.Messages;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.bukkit.command.*;
-import com.bgddevelopment.simplecommandpack.SCP;
-import org.bukkit.entity.*;
-import org.bukkit.*;
+
+import java.util.Optional;
 import java.util.*;
 
-public final class GameModeCommand implements TabExecutor {
+@CommandAlias("gamemode|gm")
+@Description("Allows you change your own or someone else's gamemode.")
+@CommandPermission("scp.gamemode")
+@Conditions("noconsole")
+public final class GameModeCommand extends BaseCommand implements TabCompleter {
+
+    @Dependency
+    private SCP plugin;
+
     private final String GAMEMODE_CHANGE = "Gamemode changed to %s!";
 
-    @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+    @Default
+    public void onDefault(CommandSender sender, String[] args) {
         final GameModeFactory factory = new GameModeFactory();
 
-        if (getPlugin().getConfig().getBoolean("Gamemode.Enabled", true)) {
+        if (plugin.getConfig().getBoolean("Gamemode.Enabled", true)) {
 
-            if (sender instanceof Player) {
-                final Player player = (Player) sender;
+            final Player player = (Player) sender;
 
-                if (player.hasPermission("scp.gamemode")) {
+            if (args.length == 1) {
+                final Optional<GameMode> gamemode = factory.getGameMode(args[0]);
 
-                    if (args.length == 1) {
-                        final Optional<GameMode> gamemode = factory.getGameMode(args[0]);
+                if (gamemode.isPresent()) {
+                    player.setGameMode(gamemode.get());
 
-                        if (gamemode.isPresent()) {
-                            player.setGameMode(gamemode.get());
+                    Common.success(player, String.format(GAMEMODE_CHANGE, Common.capitalize(gamemode.get().name())));
 
-                            Common.success(player, String.format(GAMEMODE_CHANGE, Common.capitalize(gamemode.get().name())));
+                    return;
+                }
+            } else if (args.length == 2) {
+                final Player target = Bukkit.getPlayer(args[1]);
 
-                            return true;
-                        }
+                if (target != null) {
+                    final Optional<GameMode> gamemode = factory.getGameMode(args[0]);
+
+                    if (gamemode.isPresent()) {
+                        target.setGameMode(gamemode.get());
+
+                        Common.info(target, String.format(GAMEMODE_CHANGE, Common.capitalize(gamemode.get().name())));
+                        Common.success(player, String.format("&f%s's &agamemode was changed to %s!", target.getName(), Common.capitalize(gamemode.get().name())));
+
+                        return;
                     }
-
-                    else if (args.length == 2) {
-                        final Player target = Bukkit.getPlayer(args[1]);
-
-                        if (target != null) {
-                            final Optional<GameMode> gamemode = factory.getGameMode(args[0]);
-
-                            if (gamemode.isPresent()) {
-                                target.setGameMode(gamemode.get());
-
-                                Common.info(target, String.format(GAMEMODE_CHANGE, Common.capitalize(gamemode.get().name())));
-                                Common.success(player, String.format("&f%s's &agamemode was changed to %s!", target.getName(), Common.capitalize(gamemode.get().name())));
-
-                                return true;
-                            }
-                        }
-
-                        Common.info(player, Messages.PLAYER_OFFLINE);
-
-                        return true;
-                    }
-
-                    Common.warn(player, "Invalid usage &f/<command> <gamemode> (player)".replace("<command>", label));
-
-                    return true;
                 }
 
-                Common.error(player, Messages.NO_PERMISSION);
+                Common.info(player, Messages.PLAYER_OFFLINE);
 
-                return true;
+                return;
             }
 
-            Common.tell(Common.CONSOLE, Messages.ONLY_PLAYERS);
+            Common.warn(player, "Invalid usage &f/<command> <gamemode> (player)".replace("<command>", "gamemode"));
 
-            return true;
+            return;
         }
 
-        return false;
+        return;
     }
 
     @Override
@@ -84,10 +84,6 @@ public final class GameModeCommand implements TabExecutor {
         } else {
             return Collections.emptyList();
         }
-    }
-
-    public SCP getPlugin() {
-        return SCP.getInstance();
     }
 
 }

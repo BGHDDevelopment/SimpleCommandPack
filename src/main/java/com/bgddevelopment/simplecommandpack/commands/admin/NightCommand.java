@@ -1,50 +1,36 @@
 package com.bgddevelopment.simplecommandpack.commands.admin;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.*;
 import com.bgddevelopment.simplecommandpack.SCP;
 import com.bgddevelopment.simplecommandpack.utilities.Common;
 import com.bgddevelopment.simplecommandpack.utilities.Messages;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Author:  Kim (Thinkverse) Hallberg <work@hallberg.kim>
  * Created: 2020-04-11 03:45
  */
-public final class NightCommand implements TabExecutor {
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (getPlugin().getConfig().getBoolean("Night.Enabled", true)) {
-            if (sender instanceof Player) {
-                final Player player = (Player) sender;
+@CommandAlias("night|night")
+@Description("Allows you to set the time to night.")
+@CommandPermission("scp.night")
+@Conditions("noconsole")
+public final class NightCommand extends BaseCommand {
 
-                if (player.hasPermission("scp.night")) {
-                    player.getWorld().setTime(13000L);
+    @Dependency
+    private SCP plugin;
 
-                    Common.success(player, Messages.TIME_CHANGED.replace("{time}", "Night"));
-                } else {
-                    Common.error(player, Messages.NO_PERMISSION);
-                }
-
-                return true;
-            }
+    @Default
+    public void onDefault(CommandSender sender, String[] args) {
+        if (plugin.getConfig().getBoolean("Night.Enabled", true)) {
+            final Player player = (Player) sender;
+            player.getWorld().setTime(13000L);
+            Common.success(player, Messages.TIME_CHANGED.replace("{time}", "Night"));
         }
 
-        return false;
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return Collections.emptyList();
-    }
-
-    public SCP getPlugin() {
-        return SCP.getInstance();
+        return;
     }
 
 }

@@ -1,12 +1,14 @@
 package com.bgddevelopment.simplecommandpack.commands;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.*;
 import com.bgddevelopment.simplecommandpack.SCP;
 import com.bgddevelopment.simplecommandpack.utilities.Common;
 import com.bgddevelopment.simplecommandpack.utilities.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
@@ -16,41 +18,43 @@ import java.util.List;
  * Author:  Kim (Thinkverse) Hallberg <work@hallberg.kim>
  * Created: 2020-04-15 00:47
  */
-public final class HealCommand implements TabExecutor {
+
+@CommandAlias("heal|heal")
+@Description("Allows you to heal yourself or someone else.")
+@CommandPermission("scp.heal")
+@Conditions("noconsole")
+public final class HealCommand extends BaseCommand implements TabCompleter {
+
+    @Dependency
+    private SCP plugin;
     private final double MAX_HEALTH = 20.0;
     private final int MAX_FOOD_LEVEL = 20;
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (getPlugin().getConfig().getBoolean("Heal.Enabled", true)) {
-            if (sender instanceof Player) {
-                final Player player = (Player) sender;
+    @Default
+    public void onDefault(CommandSender sender, String[] args) {
+        if (plugin.getConfig().getBoolean("Heal.Enabled", true)) {
+            final Player player = (Player) sender;
 
-                if (getPlugin().getConfig().getBoolean("Heal.Others.Enabled", true)) {
-                    if (args.length == 1 && player.hasPermission("scp.heal.others")) {
-                        final Player target = Bukkit.getPlayer(args[0]);
+            if (plugin.getConfig().getBoolean("Heal.Others.Enabled", true)) {
+                if (args.length == 1 && player.hasPermission("scp.heal.others")) {
+                    final Player target = Bukkit.getPlayer(args[0]);
 
-                        if (target != null) {
-                            this.healPlayer(target);
-                        } else {
-                            Common.info(player, Messages.PLAYER_OFFLINE);
-                        }
-
-                        return true;
+                    if (target != null) {
+                        this.healPlayer(target);
+                    } else {
+                        Common.info(player, Messages.PLAYER_OFFLINE);
                     }
-                }
 
-                if (player.hasPermission("scp.heal")) {
-                    this.healPlayer(player);
-                } else {
-                    Common.error(player, Messages.NO_PERMISSION);
+                    return;
                 }
-
-                return true;
             }
+
+            this.healPlayer(player);
+
+            return;
         }
 
-        return false;
+        return;
     }
 
     @Override
@@ -64,10 +68,6 @@ public final class HealCommand implements TabExecutor {
         player.setFireTicks(0);
 
         Common.success(player, "You've been healed!");
-    }
-
-    public SCP getPlugin() {
-        return SCP.getInstance();
     }
 
 }

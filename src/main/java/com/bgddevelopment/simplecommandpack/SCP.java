@@ -1,22 +1,20 @@
 package com.bgddevelopment.simplecommandpack;
 
+import co.aikar.commands.BukkitCommandIssuer;
+import co.aikar.commands.BukkitCommandManager;
+import co.aikar.commands.ConditionFailedException;
 import com.bgddevelopment.simplecommandpack.commands.FeedCommand;
 import com.bgddevelopment.simplecommandpack.commands.HealCommand;
 import com.bgddevelopment.simplecommandpack.commands.admin.DayCommand;
 import com.bgddevelopment.simplecommandpack.commands.admin.FlyCommand;
 import com.bgddevelopment.simplecommandpack.commands.admin.GameModeCommand;
 import com.bgddevelopment.simplecommandpack.commands.admin.NightCommand;
-import com.bgddevelopment.simplecommandpack.commands.messages.*;
 import com.bgddevelopment.simplecommandpack.events.*;
-import com.bgddevelopment.simplecommandpack.list.List;
-import com.bgddevelopment.simplecommandpack.list.YouTubersList;
-import com.bgddevelopment.simplecommandpack.updatechecker.UpdateChecker;
 import com.bgddevelopment.simplecommandpack.updatechecker.UpdateJoinEvent;
 import com.bgddevelopment.simplecommandpack.utilities.Color;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -49,24 +47,7 @@ public final class SCP extends JavaPlugin implements Listener {
 
         this.getLogger().info(String.format("SimpleCommandPack v%s loading commands ...", version));
 
-        this.registerCommand("teamspeak", new Teamspeak());
-        this.registerCommand("gm", new GameModeCommand());
-        this.registerCommand("discord", new Discord());
-        this.registerCommand("twitter", new Twitter());
-        this.registerCommand("website", new Website());
-        this.registerCommand("fly", new FlyCommand());
-        this.registerCommand("apply", new Apply());
-        this.registerCommand("rules", new Rules());
-        this.registerCommand("store", new Store());
-
-        this.registerCommand("heal", new HealCommand());
-        this.registerCommand("feed", new FeedCommand());
-        this.registerCommand("night", new NightCommand());
-        this.registerCommand("day", new DayCommand());
-
-        this.registerCommand("scphelp", new HelpMessage());
-        this.registerCommand("youtubers", new YouTubersList());
-        this.registerCommand("list", new List());
+        this.loadCommands();
 
         this.getLogger().info(String.format("SimpleCommandPack v%s loading events ...", version));
 
@@ -76,19 +57,7 @@ public final class SCP extends JavaPlugin implements Listener {
         registerEvents(this, new UpdateJoinEvent());
 
         this.getLogger().info(String.format("SimpleCommandPack v%s started ...", version));
-
-        if (getConfig().getBoolean("CheckForUpdates.Enabled", true)) {
-            new UpdateChecker(this, 45204).getLatestVersion(remoteVersion -> {
-                getLogger().info("Checking for Updates ...");
-
-                if (getDescription().getVersion().equalsIgnoreCase(remoteVersion)) {
-                    getLogger().info("No new version available");
-                } else {
-                    getLogger().warning(String.format("Newest version: %s is out! You are running version: %s", remoteVersion, getDescription().getVersion()));
-                    getLogger().warning("Please Update Here: http://www.spigotmc.org/resources/45204");
-                }
-            });
-        }
+        updateCheck(Bukkit.getConsoleSender(), true);
 
     }
 
@@ -102,8 +71,21 @@ public final class SCP extends JavaPlugin implements Listener {
         return instance;
     }
 
-    private void registerCommand(final String command, final CommandExecutor executor) {
-        this.getCommand(command).setExecutor(executor);
+    private void loadCommands() {
+        BukkitCommandManager manager = new BukkitCommandManager(this);
+        manager.getCommandConditions().addCondition("noconsole", (context) -> {
+            BukkitCommandIssuer issuer = context.getIssuer();
+            if (!issuer.isPlayer()) {
+                throw new ConditionFailedException("Console cannot use this command.");
+            }
+        });
+        manager.registerCommand(new DayCommand());
+        manager.registerCommand(new FlyCommand());
+        manager.registerCommand(new GameModeCommand());
+        manager.registerCommand(new NightCommand());
+        manager.registerCommand(new NightCommand());
+        manager.registerCommand(new FeedCommand());
+        manager.registerCommand(new HealCommand());
     }
 
     private void registerEvents(final Plugin plugin, final Listener... listeners) {
@@ -133,7 +115,7 @@ public final class SCP extends JavaPlugin implements Listener {
                 JsonObject info = plugins.get("SimpleCommandPack").getAsJsonObject();
                 String version = info.get("version").getAsString();
                 Boolean archived = info.get("archived").getAsBoolean();
-                if(archived) {
+                if (archived) {
                     sender.sendMessage(Color.translate(""));
                     sender.sendMessage(Color.translate(""));
                     sender.sendMessage(Color.translate("&cThis plugin has been marked as 'Archived' by BGHDDevelopment LLC."));

@@ -4,15 +4,6 @@
 #=======================================================
 #/scphelp (scp.help) - shows commands,perms,info (Can not be disabled!)
 #=======================================================
-Update:
-  Enabled: true
-#scp.update
-#Enables if there is a message on-join when the plugin is outdated. 
-#=======================================================
-CheckForUpdates:
-  Enabled: true
-#Enables a message in console if the plugin is outdated.
-#=======================================================
 
 Messages:
   WebsiteMessage: '&ewww.example.com - &cChange in the config.yml'

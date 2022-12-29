@@ -3,39 +3,3 @@ version: 1.4
 main: com.bgddevelopment.simplecommandpack.SCP
 authors: [BGHDDevelopment]
 website: https://bghddevelopment.com/
-commands:
-  website:
-    description: website command
-  apply:
-    description: apply command
-  discord:
-    description: discord command
-  rules:
-    description: rules command
-  teamspeak:
-    description: teamspeak command
-  store:
-    description: store command
-  twitter:
-    description: store command
-  youtubers:
-    description: lists youtubers that have a permission
-  scphelp:
-    description: help commands
-  list:
-    description: list command
-  fly:
-    description: fly
-  gm:
-    aliases: gamemode
-    description: Change your gamemode
-  heal:
-    description: Heal yourself or others
-    usage: /<command> <player>
-  feed:
-    description: Feed yourself or others
-    usage: /<command> <player>
-  day:
-    description: Sets Time To Day
-  night:
-    description: Sets Time To Night
