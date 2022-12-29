@@ -115,12 +115,12 @@ public final class SCP extends JavaPlugin implements Listener {
                 }
                 if (version.equals(getDescription().getVersion())) {
                     if (console) {
-                        sender.sendMessage(Color.translate("&aBuildMode is on the latest version."));
+                        sender.sendMessage(Color.translate("&aSimpleCommandPack is on the latest version."));
                     }
                 } else {
                     sender.sendMessage(Color.translate(""));
                     sender.sendMessage(Color.translate(""));
-                    sender.sendMessage(Color.translate("&cYour BuildMode version is out of date!"));
+                    sender.sendMessage(Color.translate("&cYour SimpleCommandPack version is out of date!"));
                     sender.sendMessage(Color.translate("&cWe recommend updating ASAP!"));
                     sender.sendMessage(Color.translate(""));
                     sender.sendMessage(Color.translate("&cYour Version: &e" + getDescription().getVersion()));
