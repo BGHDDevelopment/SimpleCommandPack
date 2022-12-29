@@ -11,6 +11,7 @@ public final class Messages {
 
     public static String TIME_CHANGED = "Time set to {time}!";
 
-    private Messages() {}
+    private Messages() {
+    }
 
 }

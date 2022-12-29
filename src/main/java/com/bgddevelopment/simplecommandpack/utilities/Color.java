@@ -1,7 +1,7 @@
 package com.bgddevelopment.simplecommandpack.utilities;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class Color {
 
     public static String translate(String message) {
-        if (Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18") || Bukkit.getVersion().contains("1.19")|| Bukkit.getVersion().contains("1.20")) {
+        if (Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18") || Bukkit.getVersion().contains("1.19") || Bukkit.getVersion().contains("1.20")) {
             Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
             Matcher matcher = pattern.matcher(message);
 

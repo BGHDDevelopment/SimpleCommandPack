@@ -12,7 +12,8 @@ import java.util.Arrays;
  */
 public final class Common {
 
-    private Common() { }
+    private Common() {
+    }
 
     public static CommandSender CONSOLE = Bukkit.getConsoleSender();
 
@@ -24,7 +25,8 @@ public final class Common {
 
     /**
      * Send a message to sender with info prefix
-     * @param sender Sender to target
+     *
+     * @param sender  Sender to target
      * @param message Message to send
      */
     public static void info(final CommandSender sender, final String message) {
@@ -33,7 +35,8 @@ public final class Common {
 
     /**
      * Send a message to sender with success prefix
-     * @param sender Sender to target
+     *
+     * @param sender  Sender to target
      * @param message Message to send
      */
     public static void success(final CommandSender sender, final String message) {
@@ -42,7 +45,8 @@ public final class Common {
 
     /**
      * Send a message to sender with warn prefix
-     * @param sender Sender to target
+     *
+     * @param sender  Sender to target
      * @param message Message to send
      */
     public static void warn(final CommandSender sender, final String message) {
@@ -51,7 +55,8 @@ public final class Common {
 
     /**
      * Send a message to sender with error prefix
-     * @param sender Sender to target
+     *
+     * @param sender  Sender to target
      * @param message Message to send
      */
     public static void error(final CommandSender sender, final String message) {
@@ -60,7 +65,8 @@ public final class Common {
 
     /**
      * Send a message to sender with question-mark prefix
-     * @param sender Sender to target
+     *
+     * @param sender  Sender to target
      * @param message Message to send
      */
     public static void question(final CommandSender sender, final String message) {
@@ -69,7 +75,8 @@ public final class Common {
 
     /**
      * Send messages to sender
-     * @param sender Sender to target
+     *
+     * @param sender   Sender to target
      * @param messages Messages to send
      */
     public static void tell(final CommandSender sender, final String... messages) {
@@ -79,8 +86,9 @@ public final class Common {
     /**
      * Broadcast messages to all online players,
      * that has a specific permission.
+     *
      * @param permission Permission node to target
-     * @param messages Messages to broadcast
+     * @param messages   Messages to broadcast
      */
     public static void notify(final String permission, final String... messages) {
         Arrays.stream(messages).map(Common::translate).forEach(message -> Bukkit.broadcast(message, permission));
@@ -88,6 +96,7 @@ public final class Common {
 
     /**
      * Broadcast messages to all online players.
+     *
      * @param messages Messages to broadcast
      */
     public static void broadcast(final String... messages) {
@@ -112,6 +121,7 @@ public final class Common {
 
     /**
      * String translated {@link ChatColor}
+     *
      * @param message Message to strip
      * @return Stripped message
      */
@@ -121,6 +131,7 @@ public final class Common {
 
     /**
      * Translate messages chat color.. {@link ChatColor}
+     *
      * @param message Message to translate
      * @return Translated message
      */
