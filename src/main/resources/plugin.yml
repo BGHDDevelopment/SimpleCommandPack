@@ -1,7 +1,8 @@
 name: SimpleCommandPack
-version: ${project.version}
-main: me.noodles.scp.SCP
+version: 1.4
+main: com.bgddevelopment.simplecommandpack.SCP
 authors: [BGHDDevelopment]
+website: https://bghddevelopment.com/
 commands:
   website:
     description: website command
